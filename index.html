@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Add your options to a colorful decision wheel and let the wheel choose for you."
+    />
+    <title>Decision Wheel</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="app-header">
+        <a class="brand" href="#" aria-label="Decision Wheel home">
+          <span class="brand-mark" aria-hidden="true">✦</span>
+          <span>Decision Wheel</span>
+        </a>
+        <span class="header-note">Decide without the debate.</span>
+      </header>
+
+      <section class="intro" aria-labelledby="page-title">
+        <p class="eyebrow">Your choices, one spin</p>
+        <h1 id="page-title">Can&rsquo;t decide?<br /><span>Let the wheel choose.</span></h1>
+        <p class="intro-copy">
+          Add two or more options, then hand the final decision over to chance.
+        </p>
+      </section>
+
+      <section class="workspace" aria-label="Decision wheel workspace">
+        <div class="wheel-panel">
+          <div class="wheel-stage">
+            <div class="pointer" aria-hidden="true"></div>
+            <div
+              id="wheel"
+              class="wheel"
+              role="img"
+              aria-label="Decision wheel containing Pizza, Tacos, Sushi, and Burgers"
+            >
+              <div id="wheel-labels" class="wheel-labels" aria-hidden="true"></div>
+              <div class="wheel-center" aria-hidden="true">✦</div>
+            </div>
+          </div>
+
+          <!-- Groupmate task: connect this button to the spin animation and winner logic. -->
+          <button id="spin-button" class="spin-button" type="button">
+            <span>Spin the wheel</span>
+            <span aria-hidden="true">→</span>
+          </button>
+          <p id="spin-status" class="spin-status">Ready when you are.</p>
+        </div>
+
+        <aside class="choices-panel" aria-labelledby="choices-title">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Build your wheel</p>
+              <h2 id="choices-title">Your choices</h2>
+            </div>
+            <span id="choice-count" class="choice-count" aria-live="polite">4 choices</span>
+          </div>
+
+          <form id="choice-form" class="choice-form">
+            <label for="choice-input">Add a new choice</label>
+            <div class="input-row">
+              <input
+                id="choice-input"
+                name="choice"
+                type="text"
+                maxlength="24"
+                placeholder="e.g. Thai food"
+                autocomplete="off"
+                required
+              />
+              <button class="add-button" type="submit" aria-label="Add choice">+</button>
+            </div>
+            <p id="form-message" class="form-message" aria-live="polite">
+              Keep choices short so they fit on the wheel.
+            </p>
+          </form>
+
+          <ul id="choice-list" class="choice-list" aria-label="Current wheel choices"></ul>
+
+          <div class="tip">
+            <span class="tip-icon" aria-hidden="true">i</span>
+            <p>Add at least two choices before spinning.</p>
+          </div>
+        </aside>
+      </section>
+    </main>
+  </body>
+</html>
