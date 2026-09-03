@@ -143,12 +143,45 @@ list.addEventListener("click", (event) => {
   renderChoices();
 });
 
-// Groupmate task: replace this temporary message with spin animation and winner selection.
+let currentRotation = 0;
+let isSpinning = false;
+
 spinButton.addEventListener("click", () => {
-  spinStatus.textContent =
-    choices.length < 2
-      ? "Add at least two choices before spinning."
-      : "Spin logic is ready for the next teammate to implement.";
+  if (choices.length < 2) {
+    spinStatus.textContent = "Add at least two choices before spinning.";
+    return;
+  }
+
+  if (isSpinning) {
+    return;
+  }
+
+  isSpinning = true;
+  spinButton.disabled = true;
+  spinStatus.textContent = "Spinning...";
+
+  const winnerIndex = Math.floor(Math.random() * choices.length);
+  const sectionAngle = 360 / choices.length;
+  const winnerCenterAngle =
+    winnerIndex * sectionAngle + sectionAngle / 2;
+
+  const extraSpins = 5 * 360;
+
+  const targetRotation =
+    currentRotation +
+    extraSpins +
+    (360 - winnerCenterAngle);
+
+  currentRotation = targetRotation;
+
+  wheel.style.transition = "transform 3s ease-out";
+  wheel.style.transform = `rotate(${targetRotation}deg)`;
+
+  setTimeout(() => {
+    spinStatus.textContent = `🎉 Winner: ${choices[winnerIndex]}!`;
+    spinButton.disabled = false;
+    isSpinning = false;
+  }, 3000);
 });
 
 renderChoices();
