@@ -143,6 +143,30 @@ list.addEventListener("click", (event) => {
   renderChoices();
 });
 
+function launchConfetti() {
+  for (let i = 0; i < 30; i++) {
+    const confetti = document.createElement("div");
+    confetti.textContent = "🎉";
+    confetti.style.position = "fixed";
+    confetti.style.left = `${Math.random() * 100}%`;
+    confetti.style.top = "-20px";
+    confetti.style.fontSize = "24px";
+    confetti.style.zIndex = "9999";
+    confetti.style.transition = "transform 2s linear, opacity 2s";
+
+    document.body.appendChild(confetti);
+
+    setTimeout(() => {
+      confetti.style.transform = `translateY(${window.innerHeight + 50}px) rotate(${Math.random() * 720}deg)`;
+      confetti.style.opacity = "0";
+    }, 50);
+
+    setTimeout(() => {
+      confetti.remove();
+    }, 2100);
+  }
+}
+
 let currentRotation = 0;
 let isSpinning = false;
 
@@ -178,10 +202,11 @@ spinButton.addEventListener("click", () => {
   wheel.style.transform = `rotate(${targetRotation}deg)`;
 
   setTimeout(() => {
-    spinStatus.textContent = `🎉 Winner: ${choices[winnerIndex]}!`;
-    spinButton.disabled = false;
-    isSpinning = false;
-  }, 3000);
+  spinStatus.textContent = `🎉 Winner: ${choices[winnerIndex]}!`;
+  launchConfetti();
+  spinButton.disabled = false;
+  isSpinning = false;
+}, 3000);
 });
 
 renderChoices();
