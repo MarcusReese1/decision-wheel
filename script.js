@@ -186,15 +186,26 @@ spinButton.addEventListener("click", () => {
 
   const winnerIndex = Math.floor(Math.random() * choices.length);
   const sectionAngle = 360 / choices.length;
-  const winnerCenterAngle =
-    winnerIndex * sectionAngle + sectionAngle / 2;
+  const winnerIndex = Math.floor(Math.random() * choices.length);
+const sectionAngle = 360 / choices.length;
+const winnerCenterAngle =
+  winnerIndex * sectionAngle + sectionAngle / 2;
 
-  const extraSpins = 5 * 360;
+const pointerAngle = 270;
+const extraSpins = 5 * 360;
 
-  const targetRotation =
-    currentRotation +
-    extraSpins +
-    (360 - winnerCenterAngle);
+const currentNormalized = currentRotation % 360;
+
+const desiredRotation =
+  (pointerAngle - winnerCenterAngle + 360) % 360;
+
+const adjustment =
+  (desiredRotation - currentNormalized + 360) % 360;
+
+currentRotation += extraSpins + adjustment;
+
+wheel.style.transition = "transform 3s ease-out";
+wheel.style.transform = `rotate(${currentRotation}deg)`;
 
   currentRotation = targetRotation;
 
